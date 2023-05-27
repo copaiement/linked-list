@@ -55,6 +55,15 @@ class LinkedList {
     return tail.value;
   }
 
+  at(index) {
+    let value;
+    if (index === 0) value = this.headVal.value;
+    else {
+      while ()
+    }
+    return value;
+  }
+
   // prints list as string
   toString() {
     let string;
@@ -91,12 +100,11 @@ console.log(testList.toString());
 console.log(testList.size());
 console.log(testList.head());
 console.log(testList.tail());
+console.log(testList.at(0));
+console.log(testList.at(2));
+console.log(testList.at(22));
 
 // FUNCTIONS:
-
-// function tail() {
-//   // returns last node in list
-// }
 
 // function at(index) {
 //   // returns node at given index
@@ -114,13 +122,6 @@ console.log(testList.tail());
 // function find(value) {
 //   // returns index of the node containing value
 //   // else return null
-// }
-
-// function toString() {
-//   // represents LinkedList objects as strings so they can be 
-//   // printed and viewed in console
-//   // format
-//   // ( value ) -> ( value ) -> null
 // }
 
 // // Extra Credit
