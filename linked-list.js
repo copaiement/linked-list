@@ -1,32 +1,66 @@
-// LinkedList class or factory to represent full list
+// LinkedList class represent full list
 class LinkedList {
   constructor() {
-    this.head = null;
+    this.headVal = null;
   }
 
+  // adds value to end of list
   append(value) {
-    if (this.head === null) this.head = new Node(value);
+    if (this.headVal === null) this.headVal = new Node(value);
     else {
-      let index = this.head;
+      let index = this.headVal;
       while (index.nextNode !== null) index = index.nextNode;
       index.nextNode = new Node(value);
     }
   }
 
+  // adds value to beginning of list
   prepend(value) {
-    if (this.head === null) this.head = new Node(value);
+    if (this.headVal === null) this.headVal = new Node(value);
     else {
-      let current = this.head;
-      this.head = new Node(value);
-      this.head.nextNode = current.value;
+      let current = this.headVal;
+      this.headVal = new Node(value);
+      this.headVal.nextNode = current;
     }
   }
 
+  // returns size of list
+  size() {
+    let size = 0;
+    if (this.headVal !== null) {
+      size ++;
+      let index = this.headVal;
+      while (index.nextNode !== null) {
+        size ++;
+        index = index.nextNode;
+      }
+    }
+    return size;
+  }
+
+  // returns first node in list
+  head() {
+    return this.headVal.value;
+  }
+
+  // returns last node in list
+  tail() {
+    let tail = null;
+    if (this.headVal !== null) {
+      tail = this.headVal;
+      while (tail.nextNode !== null) {
+        tail = tail.nextNode;
+      }
+    }
+    return tail.value;
+  }
+
+  // prints list as string
   toString() {
     let string;
-    if (this.head === null) string = 'null';
+    if (this.headVal === null) string = 'null';
     else {
-      let index = this.head;
+      let index = this.headVal;
       string = `( ${index.value} ) -> `;
       while (index.nextNode !== null) {
         index = index.nextNode;
@@ -52,26 +86,13 @@ const testList = new LinkedList();
 testList.append(6);
 testList.append(17);
 testList.append(25);
-//testList.prepend(4);
+testList.prepend(4);
 console.log(testList.toString());
+console.log(testList.size());
+console.log(testList.head());
+console.log(testList.tail());
 
 // FUNCTIONS:
-
-// function append(value) {
-//   // adds a new node containing value to end of list
-// }
-
-// function prepend(value) {
-//   // adds new node containing value to beginning of list
-// }
-
-// function size() {
-//   // returns total number of nodes in list
-// }
-
-// function head() {
-//   // returns first node in list
-// }
 
 // function tail() {
 //   // returns last node in list
