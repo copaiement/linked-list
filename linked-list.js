@@ -79,18 +79,72 @@ class LinkedList {
     let index = this.headVal;
     let indexPlusOne = index.nextNode;
     if (this.headVal === null) return;
-    else {
-      while (indexPlusOne.nextNode !== null) {
-        index = index.nextNode;
-        indexPlusOne = indexPlusOne.nextNode;
-      }
-      index.nextNode = null;
+    while (indexPlusOne.nextNode !== null) {
+      index = index.nextNode;
+      indexPlusOne = indexPlusOne.nextNode;
     }
+    index.nextNode = null;
   }
 
   // returns true is value is in list, false otherwise
   contains(value) {
-    
+    if (this.headVal === null) return false;
+    let index = this.headVal;
+    while (index.nextNode !== null) {
+      if (index.value === value) {
+        return true;
+      }
+      index = index.nextNode;
+    }
+    if (index.value === value) {
+      return true;
+    }
+    return false;
+  }
+
+  // returns index of node containing value, else return null
+  find(value) {
+    if (this.headVal === null) return null;
+    let index = 0;
+    let current = this.headVal;
+    // run through list
+    while (current.nextNode !== null) {
+      if (current.value === value) {
+        return index;
+      }
+      index ++;
+      current = current.nextNode;
+    }
+    // give proper return value at end of list
+    if (current.value === value) {
+      return index;
+    }
+    return null;
+  }
+
+  // insert value at index
+  insertAt(value, index) {
+    // if index < 0 and 
+  }
+
+  // remove value at index
+  removeAt(index) {
+    // reject negative values
+    if (index < 0) return;
+    // do nothing if list is empty
+    if (this.headVal === null) return;
+
+    let current = this.headVal;
+    // loop until one before index
+    for (let i = 0; i < index; i ++) {
+      // if list stops before index is reached, return unedited list
+      if (current.nextNode === null) return;
+      current = current.nextNode;
+    }
+    // if indexed value does not exist,return
+    if (current.nextNode === null) return;
+    // else, replace nextNode with currentPlusOne, skipping index
+    current.nextNode = current.nextNode.nextNode;
   }
 
   // prints list as string
@@ -108,7 +162,6 @@ class LinkedList {
     }
     return string;
   }
-
 }
 
 // Node class or factory containing value property and link to
@@ -121,33 +174,30 @@ function Node(value) {
 }
 
 const testList = new LinkedList();
+const testList2 = new LinkedList();
 testList.append(6);
 testList.append(17);
 testList.append(25);
 testList.prepend(4);
 testList.append(34);
 console.log(testList.toString());
-testList.pop();
+testList.removeAt(2);
+console.log(testList);
 console.log(testList.toString());
-console.log(testList.size());
-console.log(testList.head());
-console.log(testList.tail());
-console.log(testList.at(0));
-console.log(testList.at(2));
-console.log(testList.at(22));
 
-// FUNCTIONS:
-
-// function find(value) {
-//   // returns index of the node containing value
-//   // else return null
-// }
-
-// // Extra Credit
-// function insertAt(value, index) {
-//   // inserts new node with value at index
-// }
-
-// function removeAt(index) {
-//   // removes node at given index
-// }
+// testList.pop();
+// console.log(testList.toString());
+// console.log(testList.size());
+// console.log(testList.head());
+// console.log(testList.tail());
+// console.log(testList.at(0));
+// console.log(testList.at(2));
+// console.log(testList.at(22));
+// console.log(testList2.contains(11));
+// console.log(testList.contains(25));
+// console.log(testList.contains(33));
+// console.log(testList.toString());
+// console.log(testList.find(4));
+// console.log(testList.find(25));
+// console.log(testList2.find(767));
+// console.log(testList.find(22));
