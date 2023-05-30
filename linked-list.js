@@ -55,13 +55,42 @@ class LinkedList {
     return tail.value;
   }
 
+  // returns value at index
   at(index) {
-    let value;
-    if (index === 0) value = this.headVal.value;
+    let value = this.headVal;
+    // if index = 0, return head
+    if (index === 0) value = this.headVal;
     else {
-      while ()
+      // go through list to find index
+      for (let i = 1; i <= index; i ++) {
+        if (value.nextNode !== null) {
+          value = value.nextNode;
+        } else {
+          return 'Err: Index does not exist';
+        }
+      }
+
     }
-    return value;
+    return value.value;
+  }
+
+  // remove last item from list
+  pop() {
+    let index = this.headVal;
+    let indexPlusOne = index.nextNode;
+    if (this.headVal === null) return;
+    else {
+      while (indexPlusOne.nextNode !== null) {
+        index = index.nextNode;
+        indexPlusOne = indexPlusOne.nextNode;
+      }
+      index.nextNode = null;
+    }
+  }
+
+  // returns true is value is in list, false otherwise
+  contains(value) {
+    
   }
 
   // prints list as string
@@ -96,6 +125,9 @@ testList.append(6);
 testList.append(17);
 testList.append(25);
 testList.prepend(4);
+testList.append(34);
+console.log(testList.toString());
+testList.pop();
 console.log(testList.toString());
 console.log(testList.size());
 console.log(testList.head());
@@ -105,19 +137,6 @@ console.log(testList.at(2));
 console.log(testList.at(22));
 
 // FUNCTIONS:
-
-// function at(index) {
-//   // returns node at given index
-// }
-
-// function pop() {
-//   // removes last element from the list
-// }
-
-// function contains(value) {
-//   // return true if value is in list
-//   // else return false
-// }
 
 // function find(value) {
 //   // returns index of the node containing value
