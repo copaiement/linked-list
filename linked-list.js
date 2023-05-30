@@ -69,7 +69,6 @@ class LinkedList {
           return 'Err: Index does not exist';
         }
       }
-
     }
     return value.value;
   }
@@ -124,7 +123,28 @@ class LinkedList {
 
   // insert value at index
   insertAt(value, index) {
-    // if index < 0 and 
+    // reject negative index values
+    if (index < 0) return;
+    // if index = 0, use prepend function
+    if (index === 0) {
+      this.prepend(value);
+      return;
+    }
+    let current = this.headVal;
+    for (let i = 1; i < index; i ++) {
+      // if list stops before index is reached, return unedited list
+      if (current.nextNode === null) return;
+      current = current.nextNode;
+    }
+    // if list ends at index, add new node with null nextNode
+    if (current.nextNode === null) {
+      current.nextNode = new Node(value);
+      return;
+    }
+    // if index is in middle of list, add new node and push everything back
+    let next = current.nextNode;
+    current.nextNode = new Node(value);
+    current.nextNode.nextNode = next;
   }
 
   // remove value at index
@@ -133,17 +153,22 @@ class LinkedList {
     if (index < 0) return;
     // do nothing if list is empty
     if (this.headVal === null) return;
-
+    // if index = 0, replace head value
+    if (index === 0) {
+      this.headVal = this.headVal.nextNode;
+      return;
+    }
     let current = this.headVal;
     // loop until one before index
-    for (let i = 0; i < index; i ++) {
+    for (let i = 1; i < index; i ++) {
       // if list stops before index is reached, return unedited list
       if (current.nextNode === null) return;
       current = current.nextNode;
     }
     // if indexed value does not exist,return
     if (current.nextNode === null) return;
-    // else, replace nextNode with currentPlusOne, skipping index
+    // if indexed value
+    // else, replace nextNode with nextNode.nextNode, skipping index
     current.nextNode = current.nextNode.nextNode;
   }
 
@@ -181,8 +206,10 @@ testList.append(25);
 testList.prepend(4);
 testList.append(34);
 console.log(testList.toString());
-testList.removeAt(2);
-console.log(testList);
+testList.insertAt(77, 0);
+testList.insertAt(100, 6);
+testList.insertAt(600, 60);
+testList.insertAt(55, 2);
 console.log(testList.toString());
 
 // testList.pop();
@@ -201,3 +228,6 @@ console.log(testList.toString());
 // console.log(testList.find(25));
 // console.log(testList2.find(767));
 // console.log(testList.find(22));
+// console.log(testList.toString());
+// testList.removeAt(55);
+// console.log(testList.toString());
